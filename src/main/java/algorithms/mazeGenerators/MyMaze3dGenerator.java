@@ -48,7 +48,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 					}
 				}
 
-				determineValue(curPos);
+				determineValueForCell(curPos);
 				nextPositions.remove(curPos);
 			}
 			curPos = geRandomPosition();
@@ -71,7 +71,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		return result;
 	}
 
-	private boolean determineValue(Position p) {
+	private boolean determineValueForCell(Position p) {
 		List<Position> myList = result.getNeighborPositions(p);
 		boolean hasOneVisitedWall = false;
 		int unvisitedNeighbors = 0;
