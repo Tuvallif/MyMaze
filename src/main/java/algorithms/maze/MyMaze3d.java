@@ -190,7 +190,7 @@ public class MyMaze3d implements Maze3d {
 	public int getValueAtPosition(Position p) {
 		int result = 1;
 		if (cellExists(p.getHeight(), p.getWidth(), p.getDepth())) {
-			result = 0;
+			result = this.myBoard[p.getHeight()][p.getWidth()][p.getDepth()];
 		}
 
 		return result;

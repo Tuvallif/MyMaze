@@ -40,10 +40,9 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 			// (000)????should i implement myself?
 			if (visited.contains(curPos) == false) {
 				visited.add(curPos);
-				logger.debug("visiting {}", curPos);
 				List<Position> neighbors = result.getNeighborPositions(curPos);
 				for (Position pos : neighbors) {
-					if (!visited.contains(pos) && result.getValueAtPosition(pos) == 0) {
+					if (!visited.contains(pos) && result.getValueAtPosition(pos) == 1) {
 						nextPositions.add(pos);
 					}
 				}
@@ -74,19 +73,21 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 	private boolean determineValueForCell(Position p) {
 		List<Position> myList = result.getNeighborPositions(p);
 		boolean hasOneVisitedWall = false;
-		int unvisitedNeighbors = 0;
+		int unvisitedNeighbors = 0, visitedNeighbores = 0;
 
 		while (myList.isEmpty() == false) {
 			Position currNeighbor = myList.remove(0);
 			if (!visited.contains(currNeighbor)) {
 				unvisitedNeighbors++;
+			}else{
+				visitedNeighbores++;
 			}
 		}
-		if (unvisitedNeighbors == 1 || p == result.getStartPosition() || p == result.getGoalPosition()) {
+		if ((unvisitedNeighbors >= 1 && visitedNeighbores == 1) || p == result.getStartPosition() || p == result.getGoalPosition()) {
 			hasOneVisitedWall = true;
 			result.setWall(p, false);
 		}
-
+		logger.debug("value for cell {} {}", p, result.getValueAtPosition(p));
 		return hasOneVisitedWall;
 	}
 
