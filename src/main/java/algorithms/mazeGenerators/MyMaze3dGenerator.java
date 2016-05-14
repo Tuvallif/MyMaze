@@ -62,10 +62,10 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		if (nextPositions.isEmpty() == true) {
 			result = null;
 		} else {
-			//Random rand = new Random(System.currentTimeMillis());
-			//int index = rand.nextInt(nextPositions.size());
-			result = nextPositions.remove(nextPositions.size());
-			//result = nextPositions.remove(index);
+			Random rand = new Random(System.currentTimeMillis());
+			int index = rand.nextInt(nextPositions.size());
+			//result = nextPositions.remove(nextPositions.size());
+			result = nextPositions.remove(index);
 		}
 		//printMaze();
 		return result;
