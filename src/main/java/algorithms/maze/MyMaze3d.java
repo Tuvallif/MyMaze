@@ -103,6 +103,8 @@ public class MyMaze3d implements Maze3d {
 			this.myBoard[p.getHeight()][p.getWidth()][p.getDepth()] = wall ? 1 : 0;
 		}
 	}
+	
+
 
 	public String[] getPossibleMoves(Position p) throws MyPositionIsWallException {
 		// If position is a wall

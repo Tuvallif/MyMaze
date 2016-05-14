@@ -36,9 +36,12 @@ public class Run {
 	}
 
 	public static void main(String[] args) {
-//		testMazeGenerator(new SimpleMaze3dGenerator());
+		//testMazeGenerator(new SimpleMaze3dGenerator());
 		testMazeGenerator(new MyMaze3dGenerator());	
+		
 		int t = 4;
 		t=5;
 	}
+	
+
 }

@@ -31,7 +31,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 
 	public Maze3d generate() {
 		result = new MyMaze3d(new MyPosition(0, 0, 0), new MyPosition(3, 3, 3), 4, 4, 4, true);
-		Position curPos = result.getStartPosition();
+		Position curPos = result.getGoalPosition();
 
 		nextPositions.add(curPos);
 
@@ -53,7 +53,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 			curPos = geRandomPosition();
 
 		}
-
+		printMaze();
 		return result;
 	}
 
@@ -62,12 +62,27 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		if (nextPositions.isEmpty() == true) {
 			result = null;
 		} else {
-			Random rand = new Random(System.currentTimeMillis());
-			int index = rand.nextInt(nextPositions.size());
-			result = nextPositions.get(index);
+			//Random rand = new Random(System.currentTimeMillis());
+			//int index = rand.nextInt(nextPositions.size());
+			result = nextPositions.remove(nextPositions.size());
+			//result = nextPositions.remove(index);
 		}
-
+		//printMaze();
 		return result;
+	}
+	private void printMaze(){
+		
+		for(int i = 0; i < this.result.getHeight(); ++i){
+			System.out.println(" i ="+ i);
+			for(int j = 0 ; j< this.result.getWidth(); ++j){
+				for(int k = 0; k < this.result.getDepth(); ++k){
+					//System.out.print(" i ="+ i);
+					//System.out.print(" j ="+ j);
+					//System.out.print(" k ="+ k + "value is  ");
+					System.out.print(this.result.getValueAtPosition(new MyPosition(i, j, k)));
+				}System.out.println();
+			}System.out.println();
+		}
 	}
 
 	private boolean determineValueForCell(Position p) {
@@ -77,10 +92,10 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 
 		while (myList.isEmpty() == false) {
 			Position currNeighbor = myList.remove(0);
-			if (!visited.contains(currNeighbor)) {
-				unvisitedNeighbors++;
-			}else{
+			if (this.result.getValueAtPosition(currNeighbor) == 0) {
 				visitedNeighbores++;
+			}else{
+				unvisitedNeighbors++;
 			}
 		}
 		if ((unvisitedNeighbors >= 1 && visitedNeighbores == 1) || p == result.getStartPosition() || p == result.getGoalPosition()) {
