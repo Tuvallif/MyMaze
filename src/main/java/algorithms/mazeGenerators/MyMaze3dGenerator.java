@@ -98,7 +98,10 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 				unvisitedNeighbors++;
 			}
 		}
-		if ((unvisitedNeighbors >= 1 && visitedNeighbores == 1) || p == result.getStartPosition() || p == result.getGoalPosition()) {
+		if(p.getDepth() == 0 && p.getHeight() == 0 && p.getWidth() == 0){
+			int i = 3;
+		}
+		if ((unvisitedNeighbors >= 1 && visitedNeighbores == 1) || p.equals(result.getStartPosition()) || p.equals(result.getGoalPosition())) {
 			hasOneVisitedWall = true;
 			result.setWall(p, false);
 		}
