@@ -2,40 +2,71 @@ package algorithms.search;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
+
 import algorithms.maze.Maze3d;
+import algorithms.maze.MyPosition;
 import algorithms.maze.Position;
 import algorithms.search.PositionHelper;
+import algorithms.search.PositionHelper.Color;
 
 public class BFS implements Search{
 
-	List<PositionHelper> toReturn;
+	Queue<Position> queue;
 	Maze3d myMaze;
-	int [][][] boardHelper;
+	PositionHelper [][][] boardHelper;
+	List<Position> visited;
+	
 	public List<Position>  FindPath(Maze3d maze) {
 		myMaze = maze;
+		visited = new LinkedList<Position>();
 		Position Start = myMaze.getStartPosition();
 		Position Goal = myMaze.getGoalPosition();
-		toReturn = new LinkedList<PositionHelper>();
+		queue = new LinkedList<Position>();
+		List<PositionHelper>  toReturn = new LinkedList<PositionHelper>();
 		boardHelper = createMazeHelper();
 		return FindHelper(Start,Goal);
 	}
 	
 	private  List<Position> FindHelper(Position start, Position Goal){
-		if(start == Goal){
-			
-			toReturn.add(Goal);
+		//checking first the start of maze
+		if(start == myMaze.getStartPosition()){
+			//initialize start 
+			boardHelper[start.getHeight()][start.getWidth()][start.getDepth()].setFather(null);
+			boardHelper[start.getHeight()][start.getWidth()][start.getDepth()].setMycolor(Color.BLACK);
+			boardHelper[start.getHeight()][start.getWidth()][start.getDepth()].setMydistance(0);
+			boardHelper[start.getHeight()][start.getWidth()][start.getDepth()].setValue(0);//makes sense to have value?
 		}
-		else if(start == null){
-			 
+		search(start);
+		while(queue.isEmpty() == false){
+			Position curPos = queue.poll();
 		}
 		else{
 			
-			for(Position p: myMaze.getNeighborPositions(start)){
-				PositionHelper ph = p;
-				if(p == myMaze.getGoalPosition()){
-					
-				}
-				FindHelper(p, Goal);
+		}
+
+		//if you are here then start is not in visited
+		visited.add(start);
+		start.
+		//going over the list
+		for(Position p: myMaze.getNeighborPositions(start)){
+			PositionHelper ph = p;
+			if(p == myMaze.getGoalPosition()){
+
+			}
+			FindHelper(p, Goal);
+		}
+	}
+
+	
+	private void search(Position p){
+		//mark the cell as visited
+		boardHelper[p.getHeight()][p.getWidth()][p.getDepth()].setMycolor(Color.BLACK);
+		visited.add(p);
+		for(Position neiPos : myMaze.getNeighborPositions(p)){
+			//if not a wall
+			if(myMaze.getValueAtPosition(neiPos) == 0){
+				queue.add(neiPos);
 			}
 		}
 	}
