@@ -2,11 +2,12 @@ package algorithms.search;
 
 import java.util.List;
 
+import algorithms.maze.Maze3d;
 import algorithms.maze.Position;
 
 public interface Search {
 	
-	List<Position> FindPath(Position Start, Position Goal);
+	List<Position> FindPath(Maze3d myMaze);
 	
 	
 }

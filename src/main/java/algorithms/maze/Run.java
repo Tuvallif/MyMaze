@@ -39,8 +39,7 @@ public class Run {
 		//testMazeGenerator(new SimpleMaze3dGenerator());
 		testMazeGenerator(new MyMaze3dGenerator());	
 		
-		int t = 4;
-		t=5;
+		
 	}
 	
 

@@ -23,7 +23,7 @@ public class BFS implements Search{
 		Position Start = myMaze.getStartPosition();
 		Position Goal = myMaze.getGoalPosition();
 		queue = new LinkedList<Position>();
-		List<PositionHelper>  toReturn = new LinkedList<PositionHelper>();
+		//List<PositionHelper>  toReturn = new LinkedList<PositionHelper>();
 		boardHelper = createMazeHelper();
 		return FindHelper(Start,Goal);
 	}
@@ -40,35 +40,41 @@ public class BFS implements Search{
 		search(start);
 		while(queue.isEmpty() == false){
 			Position curPos = queue.poll();
-		}
-		else{
-			
-		}
-
-		//if you are here then start is not in visited
-		visited.add(start);
-		start.
-		//going over the list
-		for(Position p: myMaze.getNeighborPositions(start)){
-			PositionHelper ph = p;
-			if(p == myMaze.getGoalPosition()){
-
+			if(boardHelper[curPos.getHeight()][curPos.getWidth()][curPos.getDepth()].getMycolor() != Color.BLACK){
+				search(curPos);
 			}
-			FindHelper(p, Goal);
+			boardHelper[curPos.getHeight()][curPos.getWidth()][curPos.getDepth()].setMycolor(Color.BLACK);
 		}
+		return buildPath();
 	}
 
 	
 	private void search(Position p){
 		//mark the cell as visited
-		boardHelper[p.getHeight()][p.getWidth()][p.getDepth()].setMycolor(Color.BLACK);
+		PositionHelper myStart = boardHelper[p.getHeight()][p.getWidth()][p.getDepth()];
+		
 		visited.add(p);
 		for(Position neiPos : myMaze.getNeighborPositions(p)){
+			//using the cell itself
+			PositionHelper neiPosHelper = boardHelper[neiPos.getHeight()][neiPos.getWidth()][neiPos.getDepth()];
+			
 			//if not a wall
-			if(myMaze.getValueAtPosition(neiPos) == 0){
+			if(myMaze.getValueAtPosition(neiPos) == 0 && neiPosHelper.getMydistance() > myStart.getMydistance() + 1){
+				//changing the value and father
+				changePositionHelper(neiPosHelper, myStart);
+				neiPosHelper.setMycolor(Color.GREY);
 				queue.add(neiPos);
 			}
+			
+			
 		}
+	}
+	
+	private void changePositionHelper(PositionHelper toCheck,PositionHelper father){
+		toCheck.setFather(father);
+		toCheck.setMycolor(Color.GREY);
+		toCheck.setMydistance(father.getMydistance() + 1);
+		toCheck.setValue(0);
 	}
 	
 	private PositionHelper [][][] createMazeHelper(){
@@ -108,7 +114,22 @@ public class BFS implements Search{
 		int startWidth = start.getWidth();
 		int startDepth = start.getDepth();
 		//assigning zero
-		boardHelper[startHeight][startWidth][startDepth] = 0;
+		boardHelper[startHeight][startWidth][startDepth].setMydistance(0);
+		
+	}
+	
+	private List<Position> buildPath(){
+		Position curPos = myMaze.getGoalPosition();
+		PositionHelper curPosHelper = boardHelper[curPos.getHeight()][curPos.getWidth()][curPos.getDepth()];
+		List<Position> toReturn = new LinkedList<Position>();
+		
+		while(curPos != myMaze.getStartPosition()){
+			toReturn.add(curPos);
+			curPosHelper =  curPosHelper.getFather();
+			curPos = curPosHelper.getPos();
+		}
+		
+		return toReturn;
 	}
 
 }
