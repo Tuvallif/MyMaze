@@ -32,13 +32,10 @@ public class BFS implements Search{
 		//checking first the start of maze
 		if(start == myMaze.getStartPosition()){
 			//initialize start 
-			boardHelper[start.getHeight()][start.getWidth()][start.getDepth()].setFather(null);
-			boardHelper[start.getHeight()][start.getWidth()][start.getDepth()].setMycolor(Color.BLACK);
-			boardHelper[start.getHeight()][start.getWidth()][start.getDepth()].setMydistance(0);
-			boardHelper[start.getHeight()][start.getWidth()][start.getDepth()].setValue(0);//makes sense to have value?
+			assignZeroAtStart(start);
 		}
 		search(start);
-		while(queue.isEmpty() == false){
+		while(queue.isEmpty() != true){
 			Position curPos = queue.poll();
 			if(boardHelper[curPos.getHeight()][curPos.getWidth()][curPos.getDepth()].getMycolor() != Color.BLACK){
 				search(curPos);
@@ -85,27 +82,29 @@ public class BFS implements Search{
 		for(int i = 0 ;i < myHeight; i++){
 			myBoard[i] = myMaze.getCrossSectionByX(i);
 		}
-		assignZeroAtStart(myMaze.getStartPosition());
+		
 		
 		return initializeBoard(myBoard);
 	}
 	
 	private PositionHelper[][][] initializeBoard(int [][][] Board){
-		PositionHelper[][][] myBoard = new PositionHelper[myMaze.getHeight()][ myMaze.getWidth()][ myMaze.getDepth()];
+		boardHelper = new PositionHelper[myMaze.getHeight()][ myMaze.getWidth()][ myMaze.getDepth()];
 		for(int i = 0; i < myMaze.getHeight(); i++){
 			for(int j = 0; j < myMaze.getWidth(); j++){
 				for(int k = 0; k < myMaze.getDepth(); k++){
 					if (Board[i][j][k] == 0){
-						myBoard[i][j][k].setValue(Integer.MAX_VALUE);
+						boardHelper[i][j][k] = new PositionHelper(i, j, k);
+						boardHelper[i][j][k].setValue(Integer.MAX_VALUE);
 					}
 					else{
-						myBoard[i][j][k].setValue(-1);//stands for wall
+						boardHelper[i][j][k] = new PositionHelper(i, j, k);
+						boardHelper[i][j][k].setValue(-1);//stands for wall
 					}
 				}
 			}
 		}
 		
-		return myBoard;
+		return boardHelper;
 	}
 	
 	private void assignZeroAtStart(Position start){
@@ -115,6 +114,7 @@ public class BFS implements Search{
 		int startDepth = start.getDepth();
 		//assigning zero
 		boardHelper[startHeight][startWidth][startDepth].setMydistance(0);
+		queue.add(start);
 		
 	}
 	
