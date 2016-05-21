@@ -33,7 +33,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 	}
 
 	public Maze3d generate() {
-		result = new MyMaze3d(new MyPosition(0, 0, 0), new MyPosition(6, 6, 6), 7, 7, 7, true);
+		result = new MyMaze3d(new MyPosition(0, 0, 0), new MyPosition(4, 4, 4), 5, 5, 5, true);
 		Position curPos = result.getGoalPosition();
 
 		nextPositions.add(curPos);
@@ -49,22 +49,25 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 			List<Position> neighbors = result.getNeighborPositions(curPos);
 			if (isVertex(curPos)) {
 //				nextPositions.add(getRandomPosition(curPos));
+				result.setWall(curPos, false);
 				for (Position pos : neighbors) {
 					if (!visited.contains(pos) && (!isAlwaysWall(pos))) {
 						nextPositions.add(pos);
 					}
 				}
 			} else {// is edge
-				if(result.getValueAtPosition(curPos)==0){
-					continue;
-				}
+				//if(result.getValueAtPosition(curPos)==0){
+			//		continue;
+			//	}
 				for (Position pos : neighbors) {
 					if (!visited.contains(pos) && (!isAlwaysWall(pos))) {
 						nextPositions.add(pos);
 					}
 				}
 			}
-			result.setWall(curPos, false);
+			Position door = getRandomPosition(curPos);
+			result.setWall(door, false);
+			printMaze();
 			// determineValueForCell(curPos);
 
 			// curPos = geRandomPosition();

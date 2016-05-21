@@ -125,6 +125,24 @@ public class MyMaze3d implements Maze3d {
 
 		return result;
 	}
+	
+
+	public List<Position> getPossibleMovesPositions(Position p) throws MyPositionIsWallException {
+		// If position is a wall
+		if (!cellExists(p.getHeight(), p.getWidth(), p.getDepth())) {
+			throw new MyPositionIsWallException();
+		}
+		List<Position> neighbors = getNeighborPositions(p);
+		List<Position> possibleMoves = new LinkedList<Position>();
+		for (Position pos : neighbors) {
+			if (cellIsNotWall(pos.getHeight(), pos.getWidth(), pos.getDepth())) {
+				possibleMoves.add(pos);
+			}
+		}
+
+		return possibleMoves;
+	}
+
 
 	public List<Position> getNeighborPositions(Position p) throws MyPositionIsWallException {
 

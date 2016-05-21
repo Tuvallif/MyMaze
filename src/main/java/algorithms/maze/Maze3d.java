@@ -10,6 +10,8 @@ public interface Maze3d {
 
 	String[] getPossibleMoves(Position p) throws MyPositionIsWallException;
 
+	List<Position> getPossibleMovesPositions(Position p) throws MyPositionIsWallException;
+
 	Position getGoalPosition();
 
 	int[][] getCrossSectionByX(int x);
@@ -17,7 +19,7 @@ public interface Maze3d {
 	int[][] getCrossSectionByY(int y);
 
 	int[][] getCrossSectionByZ(int z);
-	
+
 	int getHeight();
 
 	int getWidth();
@@ -25,11 +27,12 @@ public interface Maze3d {
 	int getDepth();
 
 	void setWall(Position p, boolean wall);
-	
+
 	List<Position> getNeighborPositions(Position p);
-	
-//	List<Position> getNeighborAtLevel(Position p) throws MyPositionIsWallException ;
-	
+
+	// List<Position> getNeighborAtLevel(Position p) throws
+	// MyPositionIsWallException ;
+
 	int getValueAtPosition(Position p);
-	
+
 }
