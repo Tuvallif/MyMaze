@@ -34,5 +34,7 @@ public interface Maze3d {
 	// MyPositionIsWallException ;
 
 	int getValueAtPosition(Position p);
+	
+	void printMaze();
 
 }

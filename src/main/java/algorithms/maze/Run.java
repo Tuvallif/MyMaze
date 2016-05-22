@@ -2,7 +2,6 @@ package algorithms.maze;
 
 import algorithms.mazeGenerators.Maze3dGenerator;
 import algorithms.mazeGenerators.MyMaze3dGenerator;
-import algorithms.search.BFS;
 
 public class Run {
 	private static void testMazeGenerator(Maze3dGenerator mg) {
@@ -39,10 +38,6 @@ public class Run {
 	public static void main(String[] args) {
 		//testMazeGenerator(new SimpleMaze3dGenerator());
 		//testMazeGenerator(new MyMaze3dGenerator());	
-		MyMaze3dGenerator mtgeer = new MyMaze3dGenerator();
-		Maze3d maze = mtgeer.generate();
-		BFS myBFS = new  BFS();
-		myBFS.FindPath(maze);
 	}
 	
 

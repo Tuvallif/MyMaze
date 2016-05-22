@@ -8,11 +8,11 @@ import java.util.Queue;
 import algorithms.maze.Maze3d;
 import algorithms.maze.Position;
 
-public class BestFirstSearch implements Search {
+public class BestFirstSearch extends AbstractSearch {
 
 	private Search src;
 
-	BestFirstSearch(Search searchType) {
+	public BestFirstSearch(Search searchType) {
 		this.src = searchType;
 	}
 

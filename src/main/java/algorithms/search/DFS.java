@@ -10,11 +10,11 @@ import algorithms.demo.mySearchable;
 import algorithms.maze.Maze3d;
 import algorithms.maze.Position;
 
-public class DFS implements Search{
+public class DFS extends AbstractSearch{
 
 	Searchable myMaze;
 	
-	DFS(Searchable maze){
+	public DFS(Searchable maze){
 		this.myMaze = maze;
 	}
 	

@@ -213,5 +213,22 @@ public class MyMaze3d implements Maze3d {
 
 		return result;
 	}
+	
+	public void printMaze() {
+
+		for (int i = 0; i < this.getHeight(); ++i) {
+			System.out.println(" i =" + i);
+			for (int j = 0; j < this.getWidth(); ++j) {
+				for (int k = 0; k < this.getDepth(); ++k) {
+					// System.out.print(" i ="+ i);
+					// System.out.print(" j ="+ j);
+					// System.out.print(" k ="+ k + "value is ");
+					System.out.print(this.getValueAtPosition(new MyPosition(i, j, k)));
+				}
+				System.out.println();
+			}
+			System.out.println();
+		}
+	}
 
 }
