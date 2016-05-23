@@ -35,10 +35,11 @@ public class Run {
 		}
 	}
 
-	public static void main(String[] args) {
-		//testMazeGenerator(new SimpleMaze3dGenerator());
-		//testMazeGenerator(new MyMaze3dGenerator());	
-	}
+//	public static void main(String[] args) {
+//		//testMazeGenerator(new SimpleMaze3dGenerator());
+//		//testMazeGenerator(new MyMaze3dGenerator());
+//		
+//	}
 	
 
 }

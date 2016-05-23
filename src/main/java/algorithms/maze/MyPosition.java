@@ -4,7 +4,7 @@ public class MyPosition implements Position {
 	private int height;
 	private int width;
 	private int depth;
-	
+
 	public MyPosition(int height, int width, int depth) {
 		super();
 		this.height = height;
@@ -55,7 +55,11 @@ public class MyPosition implements Position {
 			return false;
 		return true;
 	}
-	
-	
+
+	public String printPos() {
+		String S = new String("Position: Height " + this.getHeight() + ", Width: " + this.getWidth() + ", Depth: "
+				+ this.getDepth() + ".");
+		return S;
+	}
 
 }

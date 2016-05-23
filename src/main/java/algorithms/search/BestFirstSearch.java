@@ -20,13 +20,7 @@ public class BestFirstSearch extends AbstractSearch {
 		return src.FindPath();
 	}
 	
-	Comparator<Position> comparator = new Comparator<Position>() {
-		
-	    public int compare(Position toCalculate , Position goal) {
-			return ((goal.getHeight() - toCalculate.getHeight()) + (goal.getWidth() - toCalculate.getWidth())
-					+ (goal.getDepth() - toCalculate.getDepth()));
-	    }
-	};
+
 
 
 }

@@ -29,7 +29,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		nextPositions = new LinkedList<Position>();
 		visited = new HashSet<Position>();
 		rand = new Random(System.currentTimeMillis());
-		generate();
+		//generate();
 	}
 
 	public Maze3d generate() {
