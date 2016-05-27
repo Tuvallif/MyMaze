@@ -3,12 +3,12 @@ package algorithms.demo;
 import algorithms.maze.Position;
 
 public class Vertex {
-	
+
 	private Position p;
-	
+
 	private Vertex father;
-	
-	public Vertex(Position self, Vertex father){
+
+	public Vertex(Position self, Vertex father) {
 		this.p = self;
 		this.father = father;
 	}
@@ -28,8 +28,5 @@ public class Vertex {
 	public void setFather(Vertex father) {
 		this.father = father;
 	}
-	
-	
-	
 
 }

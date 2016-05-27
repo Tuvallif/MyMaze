@@ -4,7 +4,7 @@ import algorithms.maze.Maze3d;
 
 public abstract class AbstractMaze3dGenerator implements Maze3dGenerator {
 
-	AbstractMaze3dGenerator(){
+	AbstractMaze3dGenerator() {
 	}
 
 	public abstract Maze3d generate();

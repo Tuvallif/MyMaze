@@ -1,7 +1,6 @@
 package algorithms.maze;
 
 import algorithms.mazeGenerators.Maze3dGenerator;
-import algorithms.mazeGenerators.MyMaze3dGenerator;
 
 public class Run {
 	private static void testMazeGenerator(Maze3dGenerator mg) {
@@ -35,11 +34,10 @@ public class Run {
 		}
 	}
 
-//	public static void main(String[] args) {
-//		//testMazeGenerator(new SimpleMaze3dGenerator());
-//		//testMazeGenerator(new MyMaze3dGenerator());
-//		
-//	}
-	
+	// public static void main(String[] args) {
+	// //testMazeGenerator(new SimpleMaze3dGenerator());
+	// //testMazeGenerator(new MyMaze3dGenerator());
+	//
+	// }
 
 }

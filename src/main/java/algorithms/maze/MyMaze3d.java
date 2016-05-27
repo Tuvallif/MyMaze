@@ -1,7 +1,5 @@
 package algorithms.maze;
 
-import java.util.Collection;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -125,7 +123,6 @@ public class MyMaze3d implements Maze3d {
 
 		return result;
 	}
-	
 
 	public List<Position> getPossibleMovesPositions(Position p) throws MyPositionIsWallException {
 		// If position is a wall
@@ -142,7 +139,6 @@ public class MyMaze3d implements Maze3d {
 
 		return possibleMoves;
 	}
-
 
 	public List<Position> getNeighborPositions(Position p) throws MyPositionIsWallException {
 
@@ -213,7 +209,7 @@ public class MyMaze3d implements Maze3d {
 
 		return result;
 	}
-	
+
 	public void printMaze() {
 
 		for (int i = 0; i < this.getHeight(); ++i) {

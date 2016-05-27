@@ -62,4 +62,9 @@ public class MyPosition implements Position {
 		return S;
 	}
 
+	public int compareTo(Position p) {
+		return ((this.getHeight() - p.getHeight()) + (this.getWidth() - p.getWidth())
+				+ (this.getDepth() - p.getDepth()));
+	}
+
 }

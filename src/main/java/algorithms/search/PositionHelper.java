@@ -3,10 +3,8 @@ package algorithms.search;
 import algorithms.maze.MyPosition;
 import algorithms.maze.Position;
 
-public class PositionHelper{
+public class PositionHelper {
 
-
-	
 	public PositionHelper getFather() {
 		return father;
 	}
@@ -25,7 +23,7 @@ public class PositionHelper{
 
 	public Color getMycolor() {
 		Color toReturn;
-		switch(mycolor){
+		switch (mycolor) {
 		case WHITE:
 			toReturn = Color.WHITE;
 			break;
@@ -40,7 +38,7 @@ public class PositionHelper{
 			System.out.println("illegal color!!!");
 			break;
 		}
-		
+
 		return toReturn;
 	}
 
@@ -53,31 +51,27 @@ public class PositionHelper{
 	private Color mycolor;
 	int value;
 	private Position myPos;
-	
+
 	public PositionHelper(int height, int width, int depth) {
 		mydistance = Integer.MAX_VALUE;
 		mycolor = Color.WHITE;
 		father = null;
-		myPos = new MyPosition(height,width, depth);
+		myPos = new MyPosition(height, width, depth);
 	}
-	
-	public enum Color{
+
+	public enum Color {
 		WHITE, GREY, BLACK, YELLOW
 	}
 
 	public void setValue(int value) {
 		this.value = value;
-		
+
 	}
 
 	public Position getPos() {
 		Position toReturn = new MyPosition(myPos.getHeight(), myPos.getWidth(), myPos.getDepth());
-		
-		return toReturn;	
+
+		return toReturn;
 	}
-	
-	
-
-
 
 }
