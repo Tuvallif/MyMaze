@@ -14,6 +14,9 @@ import algorithms.search.Search;
 
 public class Demo {
 
+	/**
+	 * This method runs a creation of a maze, and than finds a path using BFS, DFS, and bestFS
+	 */
 	public void Run() {
 
 		Maze3dGenerator myGernerator = new MyMaze3dGenerator();
@@ -37,8 +40,15 @@ public class Demo {
 
 	}
 
+	/**
+	 * This method prints the path from startPoint to goalPoint, according to toPrint
+	 * if the list is null - returns null
+	 * @param toPrint a list of Positions to print on the screen
+	 * @return the number of positions that were in the list
+	 */
 	private int printPath(List<Position> toPrint) {
 		int result = 0;
+		//checking that not null
 		if (toPrint == null) {
 			System.out.println("EMPTY LIST");
 		} else {
@@ -58,12 +68,18 @@ public class Demo {
 		return result;
 	}
 
+	/**
+	 * simple comparator
+	 */
 	Comparator<Position> c = new Comparator<Position>() {
 		public int compare(Position p1, Position p2) {
 			return 0;
 		}
 	};
 
+	/**
+	 * best comparator
+	 */
 	Comparator<Position> best = new Comparator<Position>() {
 		public int compare(Position p1, Position p2) {
 			return ((p1.getHeight() - p2.getHeight()) + (p1.getWidth() - p2.getWidth())
@@ -71,6 +87,14 @@ public class Demo {
 		}
 	};
 
+	
+	/**
+	 * This method prints and arrow
+	 *  ||       
+     *  ||       
+     * \||/       
+     *  \/       
+	 */
 	void printArrow() {
 		for (int i = 0; i < 2; ++i) {
 			System.out.println("        " + "||" + "       ");

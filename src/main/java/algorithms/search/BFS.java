@@ -24,6 +24,9 @@ public class BFS extends AbstractSearch {
 		this.myComp = myComparator;
 	}
 
+	/* (non-Javadoc)
+	 * @see algorithms.search.Search#FindPath()
+	 */
 	public List<Position> FindPath() {
 		List<Position> result = new LinkedList<Position>();
 		PriorityQueue<Position> toVisit = new PriorityQueue<Position>(myComp);
