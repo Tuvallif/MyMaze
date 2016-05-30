@@ -14,14 +14,40 @@ import algorithms.maze.MyMaze3d;
 import algorithms.maze.MyPosition;
 import algorithms.maze.Position;
 
+/**
+ * @author Tuval Lifshitz
+ * This class is extending Maze3dGenerator, and creating a maze3d using search algorithm
+ *
+ */
 public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3dGenerator {
+	/**
+	 * 
+	 */
 	static final Logger logger = LoggerFactory.getLogger(MyMaze3dGenerator.class);
+	/**
+	 * The next Positions to visit
+	 */
 	List<Position> nextPositions;
+	/**
+	 * the Positions that we already visited and decided what will be their case
+	 */
 	Set<Position> visited;
+	/**
+	 * a maze that will be returned
+	 */
 	Maze3d result;
+	/**
+	 * Random parameter to be used
+	 */
 	Random rand;
+	/**
+	 * param to use while debugging
+	 */
 	final int SIZE_OF_MAZE = 7;
 
+	/**
+	 * constractor to the class, initializes the members of the class.
+	 */
 	public MyMaze3dGenerator() {
 
 		nextPositions = new LinkedList<Position>();
@@ -30,6 +56,10 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		// generate();
 	}
 
+	
+	/* (non-Javadoc)
+	 * @see algorithms.mazeGenerators.AbstractMaze3dGenerator#generate()
+	 */
 	public Maze3d generate() {
 		result = new MyMaze3d(new MyPosition(0, 0, 0),
 				new MyPosition(SIZE_OF_MAZE - 1, SIZE_OF_MAZE - 1, SIZE_OF_MAZE - 1), SIZE_OF_MAZE, SIZE_OF_MAZE,
@@ -39,8 +69,6 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		nextPositions.add(curPos);
 
 		while (!nextPositions.isEmpty()) {
-			// checking the cell - why doesn't it recognize curpos
-			// (000)????should i implement myself?
 			curPos = nextPositions.remove(rand.nextInt(nextPositions.size()));
 
 			logger.debug("{}", curPos);
@@ -72,16 +100,18 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 			}
 			Position door = getRandomPosition(curPos);
 			result.setWall(door, false);
-			// printMaze();
-			// determineValueForCell(curPos);
-
-			// curPos = geRandomPosition();
-
 		}
 		printMaze();
+		
 		return result;
 	}
 
+	/**
+	 * This method is giving a random Position of a neighbor that is not always a wall,
+	 * and it will be used to generate the Maze3D
+	 * @param p - The Position of we are looking for a neighbor to
+	 * @return - a neighbor Position who is not always a wall.
+	 */
 	private Position getRandomPosition(Position p) {
 		Position resultPos;
 		List<Position> neighbors = result.getNeighborPositions(p);
@@ -96,6 +126,9 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		// printMaze()
 	}
 
+	/**
+	 * This method prints the maze
+	 */
 	private void printMaze() {
 
 		for (int i = 0; i < this.result.getHeight(); ++i) {
@@ -113,41 +146,59 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		}
 	}
 
-	private boolean determineValueForCell(Position p) {
-		List<Position> myList = result.getNeighborPositions(p);
-		boolean hasOneVisitedWall = false;
-		int unvisitedNeighbors = 0, visitedNeighbores = 0;
+//	/**
+//	 * @param p
+//	 * @return
+//	 */
+//	private boolean determineValueForCell(Position p) {
+//		List<Position> myList = result.getNeighborPositions(p);
+//		boolean hasOneVisitedWall = false;
+//		int unvisitedNeighbors = 0, visitedNeighbores = 0;
+//
+//		while (myList.isEmpty() == false) {
+//			Position currNeighbor = myList.remove(0);
+//			if (this.result.getValueAtPosition(currNeighbor) == 0) {
+//				visitedNeighbores++;
+//			} else {
+//				unvisitedNeighbors++;
+//			}
+//		}
+//		if (p.getDepth() == 0 && p.getHeight() == 0 && p.getWidth() == 0) {
+//			int i = 3;
+//		}
+//		if ((unvisitedNeighbors >= 1 && visitedNeighbores == 1) || p.equals(result.getStartPosition())
+//				|| p.equals(result.getGoalPosition())) {
+//			hasOneVisitedWall = true;
+//			result.setWall(p, false);
+//		}
+//		logger.debug("value for cell {} {}", p, result.getValueAtPosition(p));
+//		return hasOneVisitedWall;
+//	}
 
-		while (myList.isEmpty() == false) {
-			Position currNeighbor = myList.remove(0);
-			if (this.result.getValueAtPosition(currNeighbor) == 0) {
-				visitedNeighbores++;
-			} else {
-				unvisitedNeighbors++;
-			}
-		}
-		if (p.getDepth() == 0 && p.getHeight() == 0 && p.getWidth() == 0) {
-			int i = 3;
-		}
-		if ((unvisitedNeighbors >= 1 && visitedNeighbores == 1) || p.equals(result.getStartPosition())
-				|| p.equals(result.getGoalPosition())) {
-			hasOneVisitedWall = true;
-			result.setWall(p, false);
-		}
-		logger.debug("value for cell {} {}", p, result.getValueAtPosition(p));
-		return hasOneVisitedWall;
-	}
-
+	/**
+	 * This method checks if a Position is always a wall
+	 * @param toCheck - Position to check
+	 * @return - true if yes, false if not
+	 */
 	private boolean isAlwaysWall(Position toCheck) {
 		int numberOfOdd = toCheck.getHeight() % 2 + toCheck.getWidth() % 2 + toCheck.getDepth() % 2;
 		return numberOfOdd > 1;
 	}
 
-	private boolean isEdge(Position toCheck) {
-		int numberOfOdd = toCheck.getHeight() % 2 + toCheck.getWidth() % 2 + toCheck.getDepth() % 2;
-		return numberOfOdd == 1;
-	}
+//	/**
+//	 * @param toCheck
+//	 * @return
+//	 */
+//	private boolean isEdge(Position toCheck) {
+//		int numberOfOdd = toCheck.getHeight() % 2 + toCheck.getWidth() % 2 + toCheck.getDepth() % 2;
+//		return numberOfOdd == 1;
+//	}
 
+	/**
+	 * This method checks if a Position is always a door(Vertex)
+	 * @param toCheck - Position to check
+	 * @return - true if yes, false if not
+	 */
 	private boolean isVertex(Position toCheck) {
 		int numberOfOdd = toCheck.getHeight() % 2 + toCheck.getWidth() % 2 + toCheck.getDepth() % 2;
 		return numberOfOdd == 0;

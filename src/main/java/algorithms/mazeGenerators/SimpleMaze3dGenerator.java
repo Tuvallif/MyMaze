@@ -6,8 +6,16 @@ import algorithms.maze.Maze3d;
 import algorithms.maze.MyMaze3d;
 import algorithms.maze.MyPosition;
 
+/**
+ * @author Tuval Lifshitz
+ * This class extends abstractMazeGenerator, and creates a aze in a random way.
+ *
+ */
 public class SimpleMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3dGenerator {
 
+	/* (non-Javadoc)
+	 * @see algorithms.mazeGenerators.AbstractMaze3dGenerator#generate()
+	 */
 	@Override
 	public Maze3d generate() {
 		Maze3d result = new MyMaze3d(new MyPosition(0, 0, 0), new MyPosition(9, 9, 9), 10, 10, 10, false);
