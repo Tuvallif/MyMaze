@@ -8,40 +8,53 @@ import algorithms.demo.Searchable;
 import algorithms.demo.Vertex;
 import algorithms.maze.Position;
 
+/**
+ * @author Tuval Lifshitz
+ *
+ */
 public class DFS extends AbstractSearch {
 
-	Searchable myMaze;
+
+	/**
+	 * 
+	 */
 	List<Vertex> vertexConections;
 
+	/**
+	 * @param maze
+	 */
 	public DFS(Searchable maze) {
-		this.myMaze = maze;
+		this.srchbl = maze;
 		vertexConections = new LinkedList<Vertex>();
 	}
 
+	/* (non-Javadoc)
+	 * @see algorithms.search.Search#FindPath()
+	 */
 	public List<Position> FindPath() {
 		List<Position> result = new LinkedList<Position>();
 		Stack<Position> toVisit = new Stack<Position>();
 		// creating the Position from the goal position
-		Position current = myMaze.getGoalPosition();
+		Position current = srchbl.getGoalPosition();
 		// adding it to the list toVisit
 		toVisit.push(current);
 		// adding it to the vertexList
 		Vertex start = new Vertex(current, null);
-		myMaze.addToVertexList(start);
+		srchbl.addToVertexList(start);
 
-		while (!toVisit.isEmpty() && !current.equals(myMaze.getStartPosition())) {
+		while (!toVisit.isEmpty() && !current.equals(srchbl.getStartPosition())) {
 			current = toVisit.pop();
 			result.add(current);
-			List<Position> possibleMoves = myMaze.getPossibleMovesPositions(current);
+			List<Position> possibleMoves = srchbl.getPossibleMovesPositions(current);
 			for (Position p : possibleMoves) {
 				if (!result.contains(p)) {
 					toVisit.push(p);
-					myMaze.addToVertexList(p, current);
+					srchbl.addToVertexList(p, current);
 				}
 			}
 		}
 
-		myPath = myMaze.CreatePositionPathFromVertex();
+		myPath = srchbl.CreatePositionPathFromVertex();
 		return myPath;
 		// return result;
 	}

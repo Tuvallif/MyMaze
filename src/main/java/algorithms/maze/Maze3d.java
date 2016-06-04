@@ -108,5 +108,10 @@ public interface Maze3d {
 	 * the depth is , and the width is 
 	 */
 	void printMaze();
+	
+	/**
+	 * @return
+	 */
+	byte[] toByteArray();
 
 }

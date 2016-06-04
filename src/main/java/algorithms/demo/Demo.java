@@ -37,6 +37,8 @@ public class Demo {
 		int j = printPath(BFSPath);
 		System.out.println("bestfs");
 		int k = printPath(BestFSPath);
+		
+		byte[] myByte = myMaze.toByteArray();
 
 	}
 
@@ -101,11 +103,6 @@ public class Demo {
 		}
 		System.out.println("       \\" + "||" + "/       ");
 		System.out.println("        \\/       ");
-	}
-
-	public static void main(String[] args) {
-		Demo myDemo = new Demo();
-		myDemo.Run();
 	}
 
 }

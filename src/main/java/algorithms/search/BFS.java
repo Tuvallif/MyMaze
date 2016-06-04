@@ -9,18 +9,24 @@ import algorithms.demo.Searchable;
 import algorithms.demo.Vertex;
 import algorithms.maze.Position;
 
+/**
+ * @author Tuval Lifshitz
+ *Breadth-first search (BFS) is an algorithm for traversing or searching tree or graph data structures. 
+ *It starts at the tree root 
+ *(or some arbitrary node of a graph, sometimes referred to as a 'search key'[1]) 
+ *and explores the neighbor nodes first, before moving to the next level neighbors.
+ */
 public class BFS extends AbstractSearch {
 
-	Searchable searchableBoard;
 
-	// Comparator<Position> c = new Comparator<Position>() {
-	// public int compare(Position p1, Position p2){
-	// return BFS.this.compare(p1, p2);
-	// }
-	// };
 
+	/**
+	 * this is the constractor.
+	 * @param srcbrd - a searchable type to search in
+	 * @param myComparator - the comparator to use, it uses different comparators in bfs and bestfs
+	 */
 	public BFS(Searchable srcbrd, Comparator<Position> myComparator) {
-		this.searchableBoard = srcbrd;
+		this.srchbl = srcbrd;
 		this.myComp = myComparator;
 	}
 
@@ -31,25 +37,25 @@ public class BFS extends AbstractSearch {
 		List<Position> result = new LinkedList<Position>();
 		PriorityQueue<Position> toVisit = new PriorityQueue<Position>(myComp);
 		// creating the Position from the goal position
-		Position current = searchableBoard.getGoalPosition();
+		Position current = srchbl.getGoalPosition();
 		// adding it to the list toVisit
 		toVisit.add(current);
 		// adding it to the vertexList
 		Vertex start = new Vertex(current, null);
-		searchableBoard.addToVertexList(start);
+		srchbl.addToVertexList(start);
 
-		while (!toVisit.isEmpty() && !current.equals(searchableBoard.getStartPosition())) {
+		while (!toVisit.isEmpty() && !current.equals(srchbl.getStartPosition())) {
 			current = toVisit.poll();
 			result.add(current);
-			List<Position> possibleMoves = searchableBoard.getPossibleMovesPositions(current);
+			List<Position> possibleMoves = srchbl.getPossibleMovesPositions(current);
 			for (Position p : possibleMoves) {
 				if (!result.contains(p)) {
 					toVisit.add(p);
-					searchableBoard.addToVertexList(p, current);
+					srchbl.addToVertexList(p, current);
 				}
 			}
 		}
-		myPath = searchableBoard.CreatePositionPathFromVertex();
+		myPath = srchbl.CreatePositionPathFromVertex();
 		return myPath;
 		// return result;
 	}
