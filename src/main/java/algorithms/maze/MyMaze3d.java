@@ -1,10 +1,12 @@
 package algorithms.maze;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 
 import algorithms.exceptions.MyPositionIsWallException;
 import ch.qos.logback.core.subst.Tokenizer;
+import io.Tools;
 
 /**
  * @author Tuval Lifshitz
@@ -83,22 +85,10 @@ public class MyMaze3d implements Maze3d {
 		this.height = byteArray[6];
 		this.width = byteArray[7];
 		this.depth = byteArray[8];
-		byte[] uncompressedBytes = trim(byteArray, 9, byteArray.length - 9);
-		myBoard = fromMazeByte(uncompressedBytes, trim(byteArray, 6, 3));
+		byte[] uncompressedBytes = Tools.trim(byteArray, 9, byteArray.length - 9);
+		myBoard = fromMazeByte(uncompressedBytes, Tools.trim(byteArray, 6, 3));
 	}
 
-	private byte[] trim(byte[] byteArray, int start, int size) {
-		byte[] toReturn = new byte[size];
-		for (int i = 0; i < size; ++i) {
-			toReturn[i] = byteArray[start + i];
-		}
-
-		return toReturn;
-	}
-
-	private byte[] trim(byte[] byteArray, int start) {
-		return trim(byteArray, start, byteArray.length - start);
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -362,7 +352,7 @@ public class MyMaze3d implements Maze3d {
 	}
 
 	public byte[] toByteArray() {
-		return fromArrysToOne(this.getStartPosByte(), this.getGoalPosByte(), this.getMazeByte(),
+		return fromArrysToOne(this.getStartPosByte(), this.getGoalPosByte(), getMazeByte(),
 				this.getMazeSizeByte());
 	}
 
@@ -420,31 +410,6 @@ public class MyMaze3d implements Maze3d {
 	private byte[] getMazeByte() {
 		byte[] toReturn = new byte[this.getHeight() * this.getWidth() * this.getDepth()];
 		int counter = 0;
-		// int last = 0;
-		// int current = 0;
-		// for(int i = 0; i< this.getHeight();++i){
-		// for(int j = 0;j< this.getWidth();++j){
-		// for(int k = 0; k< this.getDepth();++k){
-		// if(this.getCrossSectionByX(i)[j][k] == last){
-		// counter++;
-		// }
-		// else{
-		// last = this.getCrossSectionByX(i)[j][k];
-		// for(int l = 0; l< counter/255; ++l){
-		// toReturn[current] =(byte)255;
-		// current++;
-		// //listing the ones
-		// toReturn[current] =(byte)0;
-		// current++;
-		// }
-		// toReturn[current] = getByteValue(counter);
-		// current++;
-		// counter = 0;
-		// }
-		// }
-		// }
-		// }
-		//
 		for (int i = 0; i < this.getHeight(); ++i) {
 			for (int j = 0; j < this.getWidth(); ++j) {
 				for (int k = 0; k < this.getDepth(); ++k) {
@@ -458,24 +423,22 @@ public class MyMaze3d implements Maze3d {
 	}
 
 	private int[][][] fromMazeByte(byte[] byteBoard, byte[] sizeOfBoard) {
-		int height = sizeOfBoard[0];
-		int width = sizeOfBoard[1];
-		int depth = sizeOfBoard[2];
-		int[][][] toReturn = new int[height][width][depth];
+		int heightHelper = sizeOfBoard[0];
+		int widthHelper = sizeOfBoard[1];
+		int depthHelper = sizeOfBoard[2];
+		int[][][] toReturn = new int[heightHelper][widthHelper][depthHelper];
 		int counter = 0;
-		for (int i = 0; i < height; ++i) {
-			for (int j = 0; j < width; ++j) {
-				for (int k = 0; k < depth; ++k) {
+		for (int i = 0; i < heightHelper; ++i) {
+			for (int j = 0; j < widthHelper; ++j) {
+				for (int k = 0; k < depthHelper; ++k) {
 					toReturn[i][j][k] = byteBoard[counter];
 					counter++;
 				}
 			}
 		}
-
+		this.printMaze();
 		return toReturn;
 	}
-
-	// private byte[] compress
 
 	private byte getByteValue(int toChange) {
 		// changing to byte- we know its smaller than 255
@@ -483,5 +446,49 @@ public class MyMaze3d implements Maze3d {
 
 		return toReturn;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + depth;
+		result = prime * result + ((goal == null) ? 0 : goal.hashCode());
+		result = prime * result + height;
+		result = prime * result + Arrays.deepHashCode(myBoard);
+		result = prime * result + ((start == null) ? 0 : start.hashCode());
+		result = prime * result + width;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		MyMaze3d other = (MyMaze3d) obj;
+		if (depth != other.depth)
+			return false;
+		if (goal == null) {
+			if (other.goal != null)
+				return false;
+		} else if (!goal.equals(other.goal))
+			return false;
+		if (height != other.height)
+			return false;
+		if (!Arrays.deepEquals(myBoard, other.myBoard))
+			return false;
+		if (start == null) {
+			if (other.start != null)
+				return false;
+		} else if (!start.equals(other.start))
+			return false;
+		if (width != other.width)
+			return false;
+		return true;
+	}
+	
 
 }
