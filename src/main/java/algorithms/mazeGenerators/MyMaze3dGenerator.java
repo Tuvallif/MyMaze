@@ -51,9 +51,8 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 	public MyMaze3dGenerator() {
 
 		nextPositions = new LinkedList<Position>();
-		visited = new HashSet<Position>();
+		//visited = new HashSet<Position>();
 		rand = new Random(System.currentTimeMillis());
-		// generate();
 	}
 
 	
@@ -61,6 +60,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 	 * @see algorithms.mazeGenerators.AbstractMaze3dGenerator#generate()
 	 */
 	public Maze3d generate() {
+		visited = new HashSet<Position>();
 		result = new MyMaze3d(new MyPosition(0, 0, 0),
 				new MyPosition(SIZE_OF_MAZE - 1, SIZE_OF_MAZE - 1, SIZE_OF_MAZE - 1), SIZE_OF_MAZE, SIZE_OF_MAZE,
 				SIZE_OF_MAZE, true);
@@ -102,7 +102,6 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 			result.setWall(door, false);
 		}
 		printMaze();
-		
 		return result;
 	}
 
@@ -122,8 +121,6 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 				return resultPos;
 			}
 		}
-
-		// printMaze()
 	}
 
 	/**
@@ -131,6 +128,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 	 */
 	private void printMaze() {
 
+		System.out.println("PRINTING GENERATOR");
 		for (int i = 0; i < this.result.getHeight(); ++i) {
 			System.out.println(" Height =" + i);
 			for (int j = 0; j < this.result.getWidth(); ++j) {

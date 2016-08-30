@@ -2,8 +2,8 @@ package algorithms.demo;
 
 import java.util.Comparator;
 import java.util.List;
-
 import algorithms.maze.Maze3d;
+import algorithms.maze.MyMaze3d;
 import algorithms.maze.Position;
 import algorithms.mazeGenerators.Maze3dGenerator;
 import algorithms.mazeGenerators.MyMaze3dGenerator;
@@ -39,6 +39,9 @@ public class Demo {
 		int k = printPath(BestFSPath);
 		
 		byte[] myByte = myMaze.toByteArray();
+		Maze3d myMazeFromByte = new MyMaze3d(myByte);
+		System.out.println(myMaze);
+		System.out.println(myMaze.equals(myMazeFromByte));
 
 	}
 

@@ -1,5 +1,6 @@
 package algorithms.maze;
 
+import java.io.Serializable;
 import java.util.List;
 
 import algorithms.exceptions.MyPositionIsWallException;
@@ -9,7 +10,7 @@ import algorithms.exceptions.MyPositionIsWallException;
  *This class interface is a Maze interface that can be implemented for all kinds of mazes
  *
  */
-public interface Maze3d {
+public interface Maze3d extends Serializable{
 
 	/**
 	 * This method returns the starting position of the maze

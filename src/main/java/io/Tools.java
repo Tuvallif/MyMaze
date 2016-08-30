@@ -14,6 +14,7 @@ public class Tools {
 	public static byte[] trim(byte[] byteArray, int start) {
 		return trim(byteArray, start, byteArray.length - start);
 	}
+	
 	public static byte[] compress(byte[] toCompress) {
 		byte[] toReturn = new byte[toCompress.length];
 		int value = 0;

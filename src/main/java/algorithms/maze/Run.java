@@ -18,9 +18,12 @@ public class Run {
 		// get all the possible moves from a position
 		String[] moves = maze.getPossibleMoves(p);
 		// print the moves
-		for (String move : moves)
+		for (String move : moves){
+			System.out.println("moves?");
 			System.out.println(move);
+		}
 		// prints the maze exit position
+		System.out.println("goal");
 		System.out.println(maze.getGoalPosition());
 		try {
 			// get 2d cross sections of the 3d maze

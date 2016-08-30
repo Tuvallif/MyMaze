@@ -336,6 +336,7 @@ public class MyMaze3d implements Maze3d {
 	 */
 	public void printMaze() {
 
+		System.out.println("PRINTING");
 		for (int i = 0; i < this.getHeight(); ++i) {
 			System.out.println(" i =" + i);
 			for (int j = 0; j < this.getWidth(); ++j) {
@@ -410,11 +411,20 @@ public class MyMaze3d implements Maze3d {
 	private byte[] getMazeByte() {
 		byte[] toReturn = new byte[this.getHeight() * this.getWidth() * this.getDepth()];
 		int counter = 0;
+		int cur = 0;
+		int toAssign = 0;
 		for (int i = 0; i < this.getHeight(); ++i) {
 			for (int j = 0; j < this.getWidth(); ++j) {
 				for (int k = 0; k < this.getDepth(); ++k) {
-					toReturn[counter] = (byte) this.getCrossSectionByX(i)[j][k];
+					if((cur == this.getCrossSectionByX(i)[j][k] && counter > 255)|| cur != this.getCrossSectionByX(i)[j][k]){		
+						toReturn[toAssign] = (byte)counter;
+						cur = (cur+1)%2;
+						toAssign++;
+						counter = 0;
+					}
 					counter++;
+					//toReturn[counter] = (byte) this.getCrossSectionByX(i)[j][k];
+					//counter++;
 				}
 			}
 		}
