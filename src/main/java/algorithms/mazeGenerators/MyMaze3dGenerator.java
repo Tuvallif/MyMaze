@@ -71,7 +71,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		while (!nextPositions.isEmpty()) {
 			curPos = nextPositions.remove(rand.nextInt(nextPositions.size()));
 
-			logger.debug("{}", curPos);
+			//logger.debug("{}", curPos);
 			visited.add(curPos);
 
 			List<Position> neighbors = result.getNeighborPositions(curPos);
@@ -128,7 +128,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 	 */
 	private void printMaze() {
 
-		System.out.println("PRINTING GENERATOR");
+		//System.out.println("PRINTING GENERATOR");
 		for (int i = 0; i < this.result.getHeight(); ++i) {
 			System.out.println(" Height =" + i);
 			for (int j = 0; j < this.result.getWidth(); ++j) {
@@ -144,34 +144,7 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		}
 	}
 
-//	/**
-//	 * @param p
-//	 * @return
-//	 */
-//	private boolean determineValueForCell(Position p) {
-//		List<Position> myList = result.getNeighborPositions(p);
-//		boolean hasOneVisitedWall = false;
-//		int unvisitedNeighbors = 0, visitedNeighbores = 0;
-//
-//		while (myList.isEmpty() == false) {
-//			Position currNeighbor = myList.remove(0);
-//			if (this.result.getValueAtPosition(currNeighbor) == 0) {
-//				visitedNeighbores++;
-//			} else {
-//				unvisitedNeighbors++;
-//			}
-//		}
-//		if (p.getDepth() == 0 && p.getHeight() == 0 && p.getWidth() == 0) {
-//			int i = 3;
-//		}
-//		if ((unvisitedNeighbors >= 1 && visitedNeighbores == 1) || p.equals(result.getStartPosition())
-//				|| p.equals(result.getGoalPosition())) {
-//			hasOneVisitedWall = true;
-//			result.setWall(p, false);
-//		}
-//		logger.debug("value for cell {} {}", p, result.getValueAtPosition(p));
-//		return hasOneVisitedWall;
-//	}
+
 
 	/**
 	 * This method checks if a Position is always a wall
@@ -183,14 +156,6 @@ public class MyMaze3dGenerator extends AbstractMaze3dGenerator implements Maze3d
 		return numberOfOdd > 1;
 	}
 
-//	/**
-//	 * @param toCheck
-//	 * @return
-//	 */
-//	private boolean isEdge(Position toCheck) {
-//		int numberOfOdd = toCheck.getHeight() % 2 + toCheck.getWidth() % 2 + toCheck.getDepth() % 2;
-//		return numberOfOdd == 1;
-//	}
 
 	/**
 	 * This method checks if a Position is always a door(Vertex)
