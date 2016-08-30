@@ -39,15 +39,6 @@ public class Run {
 			System.out.println("good!");
 		}
 	}
-
-	public static void main(String[] args) {
-		new Thread();
-		testMazeGenerator(new SimpleMaze3dGenerator());
-		testMazeGenerator(new MyMaze3dGenerator());
-		Demo myDemo = new Demo();
-		myDemo.Run();
-		testByteArray(new MyMaze3dGenerator());
-	}
 	
 	private static void testByteArray(Maze3dGenerator mg) {
 		
