@@ -6,6 +6,7 @@ import java.util.List;
 
 import algorithms.exceptions.MyPositionIsWallException;
 import ch.qos.logback.core.subst.Tokenizer;
+import io.MyDecompressorInputStream;
 import io.Tools;
 
 /**
@@ -148,7 +149,6 @@ public class MyMaze3d implements Maze3d {
 	 */
 	public int[][] getCrossSectionByX(int currHeight) {
 		int[][] res = new int[this.width][this.depth];
-
 		for (int i = 0; i < this.width; ++i) {
 			for (int j = 0; j < this.depth; ++j) {
 				res[i][j] = this.myBoard[currHeight][i][j];
@@ -428,25 +428,36 @@ public class MyMaze3d implements Maze3d {
 				}
 			}
 		}
-
+		for(int i = 0;i <  toReturn.length;i++){
+			System.out.print(toReturn[i]);
+		}
 		return toReturn;
 	}
 
 	private int[][][] fromMazeByte(byte[] byteBoard, byte[] sizeOfBoard) {
+		MyDecompressorInputStream in;
 		int heightHelper = sizeOfBoard[0];
 		int widthHelper = sizeOfBoard[1];
 		int depthHelper = sizeOfBoard[2];
 		int[][][] toReturn = new int[heightHelper][widthHelper][depthHelper];
-		int counter = 0;
+		int cur = 0;
+		int index = 0;
+		int counter = byteBoard[index];
 		for (int i = 0; i < heightHelper; ++i) {
 			for (int j = 0; j < widthHelper; ++j) {
 				for (int k = 0; k < depthHelper; ++k) {
-					toReturn[i][j][k] = byteBoard[counter];
-					counter++;
-				}
+					if(counter == 0){
+						index++;
+						counter = byteBoard[index];
+						cur = (cur+1)%2;
+					}
+					toReturn[i][j][k] = cur;
+					counter--;
+				}	
 			}
-		}
-		this.printMaze();
+		}	
+		//myBoard = toReturn;
+		//printMaze();
 		return toReturn;
 	}
 

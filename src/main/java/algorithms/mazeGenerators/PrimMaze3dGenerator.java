@@ -21,13 +21,24 @@ public class PrimMaze3dGenerator extends AbstractMaze3dGenerator implements Maze
 	private int height;
 	private int width;
 	private int depth;
-	private Position start = new MyPosition(0, 0, 0);
-	private Position goal = new MyPosition(9, 9, 0);
+	private Position start;
+	private Position goal;
 
-	public PrimMaze3dGenerator(int height, int y, int z) {
+	public PrimMaze3dGenerator(int height, int width, int depth) {
 		this.height = height;
-		this.width = y;
-		this.depth = z;
+		this.width = width;
+		this.depth = depth;
+		start = new MyPosition(0, 0, 0);
+		goal = new MyPosition(9, 9, 0);
+	}
+	
+	public PrimMaze3dGenerator(Position start, Position goal, int height, int width, int depth) {
+		
+		this.height = height;
+		this.width = width;
+		this.depth = depth;
+		this.start = start;
+		this.goal = goal;
 	}
 
 	public Maze3d generate() {
