@@ -7,6 +7,7 @@ import algorithms.maze.MyMaze3d;
 import algorithms.maze.Position;
 import algorithms.mazeGenerators.Maze3dGenerator;
 import algorithms.mazeGenerators.MyMaze3dGenerator;
+import algorithms.mazeGenerators.PrimMaze3dGenerator;
 import algorithms.search.BFS;
 import algorithms.search.BestFirstSearch;
 import algorithms.search.DFS;
@@ -19,7 +20,7 @@ public class Demo {
 	 */
 	public void Run() {
 
-		Maze3dGenerator myGernerator = new MyMaze3dGenerator();
+		Maze3dGenerator myGernerator = new PrimMaze3dGenerator(10,10,10);
 		Maze3d myMaze = myGernerator.generate();
 		myMaze.printMaze();
 		Searchable Srchble = new mySearchable(myMaze);

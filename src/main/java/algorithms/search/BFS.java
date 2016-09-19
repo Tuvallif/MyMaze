@@ -4,9 +4,11 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.concurrent.TimeoutException;
 
 import algorithms.demo.Searchable;
 import algorithms.demo.Vertex;
+import algorithms.maze.MyPosition;
 import algorithms.maze.Position;
 
 /**
@@ -28,6 +30,7 @@ public class BFS extends AbstractSearch {
 	public BFS(Searchable srcbrd, Comparator<Position> myComparator) {
 		this.srchbl = srcbrd;
 		this.myComp = myComparator;
+		myComp.compare(new MyPosition(1,1,1), new MyPosition(2,2,2));
 	}
 
 	/* (non-Javadoc)
@@ -45,6 +48,7 @@ public class BFS extends AbstractSearch {
 		srchbl.addToVertexList(start);
 
 		while (!toVisit.isEmpty() && !current.equals(srchbl.getStartPosition())) {
+
 			current = toVisit.poll();
 			result.add(current);
 			List<Position> possibleMoves = srchbl.getPossibleMovesPositions(current);

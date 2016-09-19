@@ -114,5 +114,15 @@ public interface Maze3d extends Serializable{
 	 * @return
 	 */
 	byte[] toByteArray();
+	
+	/**
+	 * This method returns the board of the maze
+	 * @return the board that we are using by value
+	 */
+	int[][][] getBoard();
 
+	int getSize();
+	
+	boolean cellExists(int currHeight, int currWidth, int currDepth);
+	
 }

@@ -1,7 +1,9 @@
 package algorithms.search;
 
+import java.util.Comparator;
 import java.util.List;
 
+import algorithms.maze.MyPosition;
 import algorithms.maze.Position;
 
 /**
@@ -31,5 +33,7 @@ public class BestFirstSearch extends AbstractSearch {
 	public List<Position> FindPath() {
 		return src.FindPath();
 	}
+	
+
 
 }

@@ -1,5 +1,6 @@
 package algorithms.maze;
 
+import java.lang.instrument.Instrumentation;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
@@ -108,7 +109,7 @@ public class MyMaze3d implements Maze3d {
 	public Position getGoalPosition() {
 		return this.goal;
 	}
-
+	@Override
 	/**
 	 * this method checks if the cell exists in the maze, according to the given
 	 * ints of height, width and depth
@@ -121,11 +122,11 @@ public class MyMaze3d implements Maze3d {
 	 *            - the Depth of the potential cell
 	 * @return true if cell exists, else false
 	 */
-	private boolean cellExists(int currHeight, int currWidth, int currDepth) {
+	public boolean cellExists(int currHeight, int currWidth, int currDepth) {
 		return (currHeight < this.height && currHeight >= 0 && currWidth < this.width && currWidth >= 0
 				&& currDepth < this.depth && currDepth >= 0);
 	}
-
+	
 	/**
 	 * this method checks if the cell in the maze is not a wall, according to
 	 * the given ints of height, width and depth
@@ -148,13 +149,18 @@ public class MyMaze3d implements Maze3d {
 	 * @see algorithms.maze.Maze3d#getCrossSectionByX(int)
 	 */
 	public int[][] getCrossSectionByX(int currHeight) {
-		int[][] res = new int[this.width][this.depth];
-		for (int i = 0; i < this.width; ++i) {
-			for (int j = 0; j < this.depth; ++j) {
-				res[i][j] = this.myBoard[currHeight][i][j];
+		int[][] res;
+		if(currHeight < height && currHeight >= 0 ){
+			res = new int[this.width][this.depth];
+			for (int i = 0; i < this.width; ++i) {
+				for (int j = 0; j < this.depth; ++j) {
+					res[i][j] = this.myBoard[currHeight][i][j];
+				}
 			}
+		}else{
+			res = null;
 		}
-
+		
 		return res;
 	}
 
@@ -164,12 +170,17 @@ public class MyMaze3d implements Maze3d {
 	 * @see algorithms.maze.Maze3d#getCrossSectionByY(int)
 	 */
 	public int[][] getCrossSectionByY(int currWidth) {
-		int[][] res = new int[this.height][this.depth];
+		int[][] res;
+		if(currWidth < width && currWidth >= 0 ){
+			res = new int[this.height][this.depth];
 
-		for (int i = 0; i < this.height; ++i) {
-			for (int j = 0; j < this.depth; ++j) {
-				res[i][j] = this.myBoard[i][currWidth][j];
+			for (int i = 0; i < this.height; ++i) {
+				for (int j = 0; j < this.depth; ++j) {
+					res[i][j] = this.myBoard[i][currWidth][j];
+				}
 			}
+		}else{
+			res = null;
 		}
 
 		return res;
@@ -181,12 +192,17 @@ public class MyMaze3d implements Maze3d {
 	 * @see algorithms.maze.Maze3d#getCrossSectionByZ(int)
 	 */
 	public int[][] getCrossSectionByZ(int currDepth) {
-		int[][] res = new int[this.height][this.width];
+		int[][] res;
+		if(currDepth < depth && currDepth >= 0 ){
+			res = new int[this.height][this.width];
 
-		for (int i = 0; i < this.height; ++i) {
-			for (int j = 0; j < this.width; ++j) {
-				res[i][j] = this.myBoard[i][j][currDepth];
+			for (int i = 0; i < this.height; ++i) {
+				for (int j = 0; j < this.width; ++j) {
+					res[i][j] = this.myBoard[i][j][currDepth];
+				}
 			}
+		}else{
+			res = null;
 		}
 
 		return res;
@@ -510,6 +526,19 @@ public class MyMaze3d implements Maze3d {
 			return false;
 		return true;
 	}
-	
 
+	@Override
+	public int[][][] getBoard() {
+		return myBoard;
+	}
+	
+	@Override
+	public int getSize(){
+		int sizeOfInt = Integer.SIZE;
+		//for positions start and goal
+		int PositionsSize = sizeOfInt*3*2;
+		int sizeOfBoard = sizeOfInt*this.height*this.width*this.depth;
+		int totalSize = (PositionsSize + sizeOfBoard) /4;
+		return totalSize;
+	}
 }

@@ -18,7 +18,7 @@ public abstract class AbstractSearch implements Search {
 	List<Position> myPath;
 	
 	/**
-	 * the srchable type to seach in
+	 * the searchable type to search in
 	 */
 	Searchable srchbl;
 	
@@ -38,10 +38,30 @@ public abstract class AbstractSearch implements Search {
 	/**
 	 * the general comparator to use
 	 */
-	Comparator<Position> c = new Comparator<Position>() {
+	static Comparator<Position> c = new Comparator<Position>() {
 		public int compare(Position p1, Position p2) {
-			return this.compare(p1, p2);
+			return 0;
 		}
 	};
+	
+	/**
+	 * best comparator
+	 */
+	static Comparator<Position> bestComp = new Comparator<Position>() {
+		public int compare(Position p1, Position p2) {
+			return (Math.abs(p1.getHeight() - p2.getHeight()) + Math.abs(p1.getWidth() - p2.getWidth())
+					+ Math.abs(p1.getDepth() - p2.getDepth()));
+		}
+	};
+	
+	public static Comparator<Position> getComperator(String cmprtrType){
+		
+		if(cmprtrType.toLowerCase().equals("best")){
+			return bestComp;
+		}
+		else{
+			return c;
+		}
+	}
 
 }
